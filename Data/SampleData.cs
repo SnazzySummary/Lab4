@@ -12,6 +12,10 @@ public class SampleData {
              ProvinceCode="AB",
              ProvinceName="Alberta",
          },
+         new Province() {
+             ProvinceCode="ON",
+             ProvinceName="Ontatrio",
+         },
     };
 
     static List<City> cities = new List<City>() {
@@ -23,9 +27,51 @@ public class SampleData {
          },
          new City {
              CityId = 2,
+             CityName = "Mission",
+             Population = 50000,
+             Province = "BC",
+         },
+         new City {
+             CityId = 3,
+             CityName = "Maple Ridge",
+             Population = 80000,
+             Province = "BC",
+         },
+         new City {
+             CityId = 4,
              CityName = "Calgary",
              Population = 10000000,
              Province = "AB",
+         },
+         new City {
+             CityId = 5,
+             CityName = "Drumheller",
+             Population = 40000,
+             Province = "AB",
+         },
+         new City {
+             CityId = 6,
+             CityName = "Edmondton",
+             Population = 1000000,
+             Province = "AB",
+         },
+         new City {
+             CityId = 7,
+             CityName = "Toronto",
+             Population = 1000000,
+             Province = "ON",
+         },
+         new City {
+             CityId = 8,
+             CityName = "Mississauga",
+             Population = 2001511,
+             Province = "ON",
+         },
+         new City {
+             CityId = 9,
+             CityName = "Hamilton",
+             Population = 150000,
+             Province = "ON",
          },
     };
 
