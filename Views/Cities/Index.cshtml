@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Population)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Province)
+                @Html.DisplayFor(modelItem => item.Province.ProvinceCode)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CityId">Edit</a> |

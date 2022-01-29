@@ -8,6 +8,7 @@ public class City {
     public string? CityName { get; set; }
 
     public int Population { get; set; }
+    public string? ProvinceCode { get; set; }
     [ForeignKey("ProvinceCode")]
-    public string? Province { get; set; }
+    public Province? Province { get; set; }
 }

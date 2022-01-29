@@ -23,7 +23,8 @@ namespace Lab4.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cities.ToListAsync());
+            var applicationDbContext = _context.Cities.Include(c => c.Province);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Cities/Details/5
@@ -35,6 +36,7 @@ namespace Lab4.Controllers
             }
 
             var city = await _context.Cities
+                .Include(c => c.Province)
                 .FirstOrDefaultAsync(m => m.CityId == id);
             if (city == null)
             {
@@ -47,6 +49,7 @@ namespace Lab4.Controllers
         // GET: Cities/Create
         public IActionResult Create()
         {
+            ViewData["ProvinceCode"] = new SelectList(_context.Provinces, "ProvinceCode", "ProvinceCode");
             return View();
         }
 
@@ -55,7 +58,7 @@ namespace Lab4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CityId,CityName,Population,Province")] City city)
+        public async Task<IActionResult> Create([Bind("CityId,CityName,Population,ProvinceCode")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,7 @@ namespace Lab4.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ProvinceCode"] = new SelectList(_context.Provinces, "ProvinceCode", "ProvinceCode", city.ProvinceCode);
             return View(city);
         }
 
@@ -79,6 +83,7 @@ namespace Lab4.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProvinceCode"] = new SelectList(_context.Provinces, "ProvinceCode", "ProvinceCode", city.ProvinceCode);
             return View(city);
         }
 
@@ -87,7 +92,7 @@ namespace Lab4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CityId,CityName,Population,Province")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("CityId,CityName,Population,ProvinceCode")] City city)
         {
             if (id != city.CityId)
             {
@@ -114,6 +119,7 @@ namespace Lab4.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ProvinceCode"] = new SelectList(_context.Provinces, "ProvinceCode", "ProvinceCode", city.ProvinceCode);
             return View(city);
         }
 
@@ -126,6 +132,7 @@ namespace Lab4.Controllers
             }
 
             var city = await _context.Cities
+                .Include(c => c.Province)
                 .FirstOrDefaultAsync(m => m.CityId == id);
             if (city == null)
             {
